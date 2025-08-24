@@ -22,7 +22,8 @@ This refactored repository will not be maintained.
 ---
 
 ## Screenshot
-<img width="1440" height="2184" alt="image" src="https://github.com/user-attachments/assets/b0ee470b-a46a-44f0-b722-5a66c9bfe83f" />
+
+![image/png](https://cdn-uploads.huggingface.co/production/uploads/639daf827270667011153fbc/zMAmg93CH66zgMkgxAsez.png)
 
 ---
 
