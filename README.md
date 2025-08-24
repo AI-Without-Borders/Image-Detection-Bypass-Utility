@@ -151,6 +151,50 @@ def process_image(inpath: str, outpath: str, args):
 - PRs welcome. If you modify UI layout or parameter names, keep the `args` mapping consistent or update `README` and `worker.py` accordingly.  
 - Add unit tests for `worker.py` and the parameter serialization if you intend to refactor.
 
+## Gradio / Hugging Face Spaces (Web UI)
+
+This repository includes a lightweight Gradio front-end (`app_gradio.py`) that wraps the existing
+`process_image(inpath, outpath, args)` pipeline. The Gradio app is suitable for local testing and
+for deployment to Hugging Face Spaces (Gradio-backed web apps).
+
+### Quick local run
+
+1. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+2. Launch the Gradio app:
+
+```bash
+python3 app_gradio.py
+```
+
+Open http://localhost:7860 in your browser. The UI saves the uploaded image to a temporary file,
+calls the existing `process_image` pipeline, and returns the processed image.
+
+### Deploying to Hugging Face Spaces
+
+1. Ensure the following are present at the repository root:
+     - `app_gradio.py` (the Gradio entrypoint)
+     - `requirements.txt` (must include `gradio` and any other runtime deps)
+
+2. Push the repository to a new Space on Hugging Face (create a new Space and connect this repo or
+     push to the Space's Git remote). Spaces will automatically run the Gradio app.
+
+Notes & tips for Spaces:
+- Keep default upload/processing sizes modest to avoid long CPU usage in the free tier.
+- If your pipeline uses optional packages (OpenCV, piexif, etc.), make sure they are listed in
+    `requirements.txt` so Spaces installs them.
+- If processing is slow, consider reducing default image size or exposing fewer parameters to the
+    main UI and keeping advanced controls hidden in an "Advanced" section.
+
+### Troubleshooting
+- If Gradio is not installed, `app_gradio.py` will raise an error; add `gradio` to `requirements.txt`.
+- Any import errors from `image_postprocess` will surface when calling the app; run the smoke test
+    (`python3 test_smoke_gradio.py`) locally to validate imports and pipeline execution before pushing.
+
 ---
 
 ## License

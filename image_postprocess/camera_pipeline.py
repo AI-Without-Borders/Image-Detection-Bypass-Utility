@@ -217,7 +217,9 @@ def simulate_camera_pipeline(img_arr: np.ndarray,
     # 1) Bayer mosaic + demosaic (if enabled)
     if bayer:
         try:
-            mosaic = _bayer_mosaic(out[:, :, ::-1])  # we built mosaic assuming R,G,B order; send RGB
+            # Build mosaic from the RGB image (no channel reversal). Previously the code
+            # reversed channels here which caused R/B swapping and strong green tint.
+            mosaic = _bayer_mosaic(out)
             if _HAS_CV2:
                 # cv2 expects a single-channel Bayer and provides demosaicing codes
                 # We'll use RGGB code (COLOR_BAYER_RG2BGR) so convert back to RGB after

@@ -1,4 +1,4 @@
-pyqt5
+gradio
 pillow
 numpy
 matplotlib
