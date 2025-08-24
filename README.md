@@ -7,7 +7,7 @@ sdk: gradio
 sdk_version: 5.35.0
 app_file: app_gradio.py
 pinned: true
-short_description: Deepfake detection circumvention utility refactored for HF Spaces.
+short_description: DF detection circumvention utility refactored for HF Spaces.
 ---
 
 
